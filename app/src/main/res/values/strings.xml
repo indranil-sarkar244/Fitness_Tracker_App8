@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Fitness  Tracker</string>
+    <string name="bmi">BMI</string>
+    <string name="health_tips">Health Tips</string>
+    <string name="steps">Steps</string>
+</resources>

@@ -41,4 +41,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+//    implementation of Auth and fit api
+    implementation ("com.google.android.gms:play-services-fitness:21.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.1.0")
+//    2nd dependency change
+    repositories{
+        google()
+        mavenCentral()
+    }
 }

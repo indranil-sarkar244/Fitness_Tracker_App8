@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-
+import android.renderscript.Element;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+//fit api lybreris
+import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +37,16 @@ public class MainActivity extends AppCompatActivity {
                 finish();//finish(); closes MainActivity, so when the user presses the back button, they won't return to it.
             }
         }, 3000);
+
     }
+//   GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//        .requestEmail
+//                       new Scope(Scopes.FITNESS_LOCATION_READ_WRITE))
+//        .build();
+   FitnessOptions fitnessOptions =
+        FitnessOptions.builder()
+                .addDataType(Element.DataType.RS_FONT, FitnessOptions.ACCESS_READ)
+                .build();
+
+
 }

@@ -20,6 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:title="Body Mass Index for humans"
+        app:title="Body Mass Index for humans 2.o"
         app:titleTextColor="#FFF9C4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

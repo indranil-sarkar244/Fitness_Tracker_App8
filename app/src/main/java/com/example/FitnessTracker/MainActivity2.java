@@ -11,17 +11,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class MainActivity2 extends AppCompatActivity {
     ImageView imageViewbmi;
-    ImageView imageViewsensor;
+    private LottieAnimationView steps;
+ private LottieAnimationView bmi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        imageViewsensor=findViewById(R.id.steps);
-        imageViewbmi=findViewById(R.id.bmi);
-        imageViewbmi.setOnClickListener(new View.OnClickListener() {
+       steps=findViewById(R.id.step);
+        bmi=findViewById(R.id.BMI);
+        bmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent=new Intent(MainActivity2.this, BmiActivity.class);
@@ -29,7 +32,7 @@ public class MainActivity2 extends AppCompatActivity {
                }
        });
 
-        imageViewsensor.setOnClickListener(new View.OnClickListener() {
+        steps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent=new Intent(MainActivity2.this, SensorActivity.class);

@@ -8,7 +8,11 @@ import androidx.annotation.Nullable;
 
 public class fitnessDB extends SQLiteOpenHelper {
     private  static final String DATABASE_NAME="FitnessDB";
-    private  static final int DATABASE_VERSION= 1;
+    private  static final int DATABASE_VERSION;
+
+    static {
+        DATABASE_VERSION = 1;
+    }
 
 
     public fitnessDB(Context context) {

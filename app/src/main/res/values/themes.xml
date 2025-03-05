@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.FitnessTracker" parent="Base.Theme.FitnessTracker" />
+
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" > <!-- Defines a custom theme "AppTheme.Picker" that inherits from a light theme without an ActionBar -->
+        <item name="android:textColorPrimary">@android:color/holo_blue_bright</item>  <!-- Sets the primary text color to bright blue -->
+        <item name="android:textSize">22sp</item> <!-- Sets the text size to 22sp for better readability -->
+    </style>
 </resources>

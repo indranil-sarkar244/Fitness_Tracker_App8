@@ -42,9 +42,9 @@
                 android:textStyle="bold" />
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/BMI"
+                android:id="@+id/jumping_jack"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="212dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView"
@@ -117,12 +117,6 @@
         app:layout_constraintTop_toBottomOf="@id/cardView">
 
 
-        <ImageView
-            android:id="@+id/tips"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/tips" />
-
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
@@ -133,6 +127,20 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/Exercise"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/exerciselogo"
+            app:lottie_speed="1.5" />
+
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

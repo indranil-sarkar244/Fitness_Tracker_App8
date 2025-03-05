@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">Fitness  Tracker</string>
     <string name="bmi">BMI</string>
-    <string name="health_tips">Health Tips</string>
+    <string name="health_tips">Exercises</string>
     <string name="steps">Steps</string>
+    <string name="enter_weight_in_kg">Enter weight in Kg</string>
+    <string name="enter_height_in_cm">Enter height in cm</string>
+    <string name="compute_bmi">Compute BMI</string>
+    <string name="jumping_jack">Jumping  jack</string>
+    <string name="start">Start</string>
+    <string name="squats">Squats</string>
+    <string name="Lunges">lunges\n</string>
+    <string name="push_ups">Push ups</string>
+    <string name="sit_ups">Sit-ups</string>
+    <string name="t_plank">T-plank</string>
+    <string name="crunches">Crunches</string>
+    <string name="burpees">Burpees</string>
+    <string name="high_knees">High Knees</string>
+    <string name="bench_dips">Bench Dips</string>
+    <string name="textview">TextView</string>
+    <string name="start_the_exercise_user_want">Start</string>
 </resources>

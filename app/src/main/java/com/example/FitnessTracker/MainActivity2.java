@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -17,13 +13,15 @@ public class MainActivity2 extends AppCompatActivity {
     ImageView imageViewbmi;
     private LottieAnimationView steps;
  private LottieAnimationView bmi;
+ private LottieAnimationView exercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
        steps=findViewById(R.id.step);
-        bmi=findViewById(R.id.BMI);
+        bmi=findViewById(R.id.jumping_jack);
+        exercise=findViewById(R.id.Exercise);
         bmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +38,13 @@ public class MainActivity2 extends AppCompatActivity {
                }
        });
 
+        exercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity2.this, ExerciseActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

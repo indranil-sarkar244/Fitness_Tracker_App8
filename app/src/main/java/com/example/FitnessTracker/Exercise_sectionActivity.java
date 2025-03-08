@@ -30,8 +30,8 @@ public class Exercise_sectionActivity extends AppCompatActivity {
     private NumberPicker secondpicker;// created a varriable of NumberPicker
     private Button startbutton;// created a varriable of Button
     private CountDownTimer countDownTimer;//created a varriable of CountDownTimer
-    private long timeinMillis , remainingTimeMillis;// created a long varriable
-    private boolean isTimerRunning=false, isPaused=false;//created a boolean flag
+    private long timeinMillis , remainingTimeMillis=0;// created 2 long varriable firstone will store the whole time set for timer in millisecond and the second one wil be used while pause and resuming to count how much we have to count for the remaining time
+    private boolean isTimerRunning=false, isPaused=false;//created 2  boolean flag one is for detecting is the countdown is continuing or not and the second one is for detecting if the timer is paused or not
 
 
     @Override
@@ -68,21 +68,22 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                 // if the condition is false means already a timer is running if true means no timer is running we checked using if statement because if
                 // a timer is already running and then the user click the start button to start a timer in the middle of a timer the app may be  crashed
             {
-               // startTimer();// called the starttimer method which we have created below
-                pauseTimer();
-            } else if (isPaused)
+                pauseTimer(); // if the if statement is not  satisfied then it will call pausetimer because if a time or countdown is already running then the user will obviously may want to pause the timer
+                //pausetimer is a method which we have created below
+            } else if (isPaused)// checking if the time is paused using boolean varriable or flag isPaused
             {
-                resumeTimer();
+                resumeTimer(); // if the else if statement is satisfied here it will call resumetimer method because if the else if statement is satisfied then it means that the user has paused the timer
+                // and obviousely if the timer is paused for some reason the user will may want to resume it again to start it from where he stopped it.......> resumetimer is a method we have created below
             }
-            else
+            else // if the if and also the else if statement is not satisfied then it means that the user has not started the timer yet
             {
-                startTimer();
+                startTimer(); // that's why we will call here the startTimer  method for starting the timer again startTimer is a method which we have created below
             }
         });
 
     }
 
-    private void startTimer()
+    private void startTimer() // here we have created or defined the startTimer method
     {
         int hour=hourpicker.getValue();// getting the value of hourspicker set by the user
         int minute=minutepicker.getValue();// similarly getting the value of minutepicker set by the user
@@ -104,7 +105,8 @@ public class Exercise_sectionActivity extends AppCompatActivity {
             secondpicker.setEnabled(false);// when the countdown has started the user can't set the timer until the timer is finished that's why  similarly we have setEnabled false of the secondpicker
 
            countDownTimer=new CountDownTimer(timeinMillis, 1000) { // created an object of countDownTimer which takes 2 argument first one is the whole duration or the timer set by user in milliseconds
-               // 2nd argument is the interval here it is 1000 millisecond means after each milliseconds the countdown will be updated as 1 second=1000millisecond
+               // 2nd argument is the interval here
+               // it is 1000 millisecond means after each milliseconds the countdown will be updated as 1 second=1000millisecond......> //countDownTimer is a built in class used for setting timer
                @Override
                public void onTick(long millisUntilFinished) {// millisUntilFinished is an attribute which give the remaining time of the countdown for example if timer  is set for 2 minutes then after 40 second the remaining time is 1 minute 20 seconds
                    long hours=(millisUntilFinished/3600000); // divided the millisUntilFinished  by 3600000 to get total hours since 1 hour = 3600000 milliseconds
@@ -113,10 +115,11 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                    hourpicker.setValue((int)hours); // updating the hourpicker with the value of hours after each second as 1000 miliseconds interval has already applied by taking 1000 as the second argument
                    minutepicker.setValue((int)minutes);// similarly updating the minutepicker with the value of minutes after each second
                    secondpicker.setValue((int)seconds);// similarly updating the secondpicker with the value of seconds after each second
+                   startbutton.setText("Pause");// set the text of start button to pause as when the user has started the timer he will not again start the timer untill the remaining one is finished but he may want to pause the timer for which we have set the text of button to pause for better user experience
                }
 
                @Override
-               public void onFinish() { // this method is applied after the timer is finished
+               public void onFinish() { // this method is applied after the timer is finished or the program inside the onTick finished
 
                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//this line clears the flag so that the screen can naturally off after the timer is finished
 
@@ -128,7 +131,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                    minutepicker.setEnabled(true);// similarly setEnabled is set to true  for minute this will help the user to agian set the timer
                    secondpicker.setEnabled(true);// similarly setEnabled is set to true  for second this will help the user to agian set the timer
                    isTimerRunning=false; // the flag is set to false again so that in the if statement checking before setting timer again then it is false so that the user start the timer again
-
+                   startbutton.setText("Start");
                }
            }.start(); //at last this start method is called to start this whole starttimer method
 
@@ -136,21 +139,24 @@ public class Exercise_sectionActivity extends AppCompatActivity {
         }
     }
 
-    private void pauseTimer()
+    private void pauseTimer()// this is the pauseTimer method for acting the starbutton as pause button when started the timer
     {
-        if (countDownTimer!=null) {
-            countDownTimer.cancel();
+        if (countDownTimer!=null) {//checking if there is any countdown is running or not if it is null the no countdown is running if its not null then the countdown is running
+            countDownTimer.cancel(); // this line basically pause the timer by using built in method cancel()
+            countDownTimer=null;// setting the countdown to null as timer is paused so setting the coundowntimer object null will help us to understand countdown is running now or not
         }
-        isTimerRunning=false;
-        isPaused=true;
-        startbutton.setText("Resume");
+        remainingTimeMillis=(hourpicker.getValue()*3600+minutepicker.getValue()*60+secondpicker.getValue())*1000;//its a mathematical calculation we have done to store the remaining time to count after pausing the timer so that when resumed it can start counting from where it was stopped....> we have done similar mathematical calculation above at line 92 where it was fully explained
+        startbutton.setText("Resume");// set the text of button as resume for better user experience as when timer is paused by the user he may want to resume the timer again
+        isTimerRunning=false;//it is set to false as after pausing the time no timer is running
+        isPaused=true;// it is set to true as this method will pause the timer
+
     }
 
     private void resumeTimer()
     {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        countDownTimer =new CountDownTimer(remainingTimeMillis,1000) {
+        countDownTimer =new CountDownTimer(remainingTimeMillis,1000) { //again created an object of counttimer to start counting timer again after being resumed
             @Override
             public void onTick(long millisUntilFinished) {
                 remainingTimeMillis=millisUntilFinished;
@@ -165,34 +171,14 @@ public class Exercise_sectionActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
-                resetTimer();
-//                startbutton.setText("Start");
+                startTimer();
+                isTimerRunning=false;
+                isPaused=false;
+                startbutton.setText("Start");
             }
         }.start();
         startbutton.setText("Pause");
         isTimerRunning=true;
         isPaused=false;
     }
-
-    private void resetTimer()
-    {
-        if (countDownTimer!=null)
-        {
-            countDownTimer.cancel();
-        }
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        hourpicker.setValue(0);
-        minutepicker.setValue(0);
-        secondpicker.setValue(0);
-
-        hourpicker.setEnabled(true);
-        minutepicker.setEnabled(true);
-        secondpicker.setEnabled(true);
-        isTimerRunning=false;
-       isPaused=false;
-       remainingTimeMillis=0;
-       startbutton.setText("Start");
-    }
-
 }

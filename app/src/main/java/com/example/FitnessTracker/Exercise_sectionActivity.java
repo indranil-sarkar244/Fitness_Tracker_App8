@@ -4,8 +4,10 @@ import static com.example.FitnessTracker.ExerciseActivity.animationResId;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +32,10 @@ public class Exercise_sectionActivity extends AppCompatActivity {
     private NumberPicker secondpicker;// created a varriable of NumberPicker
     private Button startbutton;// created a varriable of Button
     private CountDownTimer countDownTimer;//created a varriable of CountDownTimer
+    private MediaPlayer  mediaPlayer;
     private long timeinMillis , remainingTimeMillis=0;// created 2 long varriable firstone will store the whole time set for timer in millisecond and the second one wil be used while pause and resuming to count how much we have to count for the remaining time
     private boolean isTimerRunning=false, isPaused=false;//created 2  boolean flag one is for detecting is the countdown is continuing or not and the second one is for detecting if the timer is paused or not
+   private  boolean NotClicked=true;
 
 
     @Override
@@ -130,8 +134,9 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                    hourpicker.setEnabled(true);// setEnabled is set to true for hours this will help the user to agian set the timer
                    minutepicker.setEnabled(true);// similarly setEnabled is set to true  for minute this will help the user to agian set the timer
                    secondpicker.setEnabled(true);// similarly setEnabled is set to true  for second this will help the user to agian set the timer
-                   isTimerRunning=false; // the flag is set to false again so that in the if statement checking before setting timer again then it is false so that the user start the timer again
-                   startbutton.setText("Start");
+                   isTimerRunning=false;// the flag is set to false again so that in the if statement checking before setting timer again then it is false so that the user start the timer again
+                   isPaused=false;
+                   sendNotification();
                }
            }.start(); //at last this start method is called to start this whole starttimer method
 
@@ -175,10 +180,71 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                 isTimerRunning=false;
                 isPaused=false;
                 startbutton.setText("Start");
+                hourpicker.setEnabled(true);//enabled each numberpickers true so that it can again take input after finishing one time
+                minutepicker.setEnabled(true);
+                secondpicker.setEnabled(true);
+                countDownTimer=null;
+                sendNotification();
             }
         }.start();
         startbutton.setText("Pause");
         isTimerRunning=true;
         isPaused=false;
+    }
+
+    private void sendNotification()
+    {
+        startbutton.setText("Done");
+        if (mediaPlayer!=null)
+        {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer=null;
+        }
+        else
+        {
+            mediaPlayer = MediaPlayer.create(Exercise_sectionActivity.this, R.raw.notify_timer_finish);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        }
+        startbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mediaPlayer != null && mediaPlayer.isPlaying())
+                {
+                   mediaPlayer.stop();
+                    //mediaPlayer.reset();
+                    mediaPlayer.release();
+                    mediaPlayer=null;
+                    startbutton.setText("Start");
+                    startbutton.setOnClickListener(null);
+                    ReInitializeStartButton();
+
+                }
+            }
+        });
+    }
+
+    private void ReInitializeStartButton()
+    {
+        startbutton.setOnClickListener(v ->{ // when the button for timer is clicked
+            if (isTimerRunning) // checking if a timer is already running using the boolean varriable isTimerRunning which is already set to false
+            // if the condition is false means already a timer is running if true means no timer is running we checked using if statement because if
+            // a timer is already running and then the user click the start button to start a timer in the middle of a timer the app may be  crashed
+            {
+                pauseTimer(); // if the if statement is not  satisfied then it will call pausetimer because if a time or countdown is already running then the user will obviously may want to pause the timer
+                //pausetimer is a method which we have created below
+            } else if (isPaused)// checking if the time is paused using boolean varriable or flag isPaused
+            {
+                resumeTimer(); // if the else if statement is satisfied here it will call resumetimer method because if the else if statement is satisfied then it means that the user has paused the timer
+                // and obviousely if the timer is paused for some reason the user will may want to resume it again to start it from where he stopped it.......> resumetimer is a method we have created below
+            }
+            else // if the if and also the else if statement is not satisfied then it means that the user has not started the timer yet
+            {
+                startTimer(); // that's why we will call here the startTimer  method for starting the timer again startTimer is a method which we have created below
+            }
+        });
+
     }
 }

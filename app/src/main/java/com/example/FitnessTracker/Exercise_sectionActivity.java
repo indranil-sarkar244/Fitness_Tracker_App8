@@ -32,7 +32,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
     private NumberPicker secondpicker;// created a varriable of NumberPicker
     private Button startbutton;// created a varriable of Button
     private CountDownTimer countDownTimer;//created a varriable of CountDownTimer
-    private MediaPlayer  mediaPlayer;
+    private MediaPlayer  mediaPlayer, mediaPlayer1;
     private long timeinMillis , remainingTimeMillis=0;// created 2 long varriable firstone will store the whole time set for timer in millisecond and the second one wil be used while pause and resuming to count how much we have to count for the remaining time
     private boolean isTimerRunning=false, isPaused=false;//created 2  boolean flag one is for detecting is the countdown is continuing or not and the second one is for detecting if the timer is paused or not
    private  boolean NotClicked=true;
@@ -102,8 +102,6 @@ public class Exercise_sectionActivity extends AppCompatActivity {
         }
         else
         {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // this line keeps the screen on until the timer is finished because if the screen off at during the countdown it will give a bad user experience
-
             hourpicker.setEnabled(false);// when the countdown has started the user can't set the timer until the timer is finished that's why we have setEnabled false of the hourpicker
             minutepicker.setEnabled(false);// when the countdown has started the user can't set the timer until the timer is finished that's why similarly we have setEnabled false of the minutepicker
             secondpicker.setEnabled(false);// when the countdown has started the user can't set the timer until the timer is finished that's why  similarly we have setEnabled false of the secondpicker
@@ -113,6 +111,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                // it is 1000 millisecond means after each milliseconds the countdown will be updated as 1 second=1000millisecond......> //countDownTimer is a built in class used for setting timer
                @Override
                public void onTick(long millisUntilFinished) {// millisUntilFinished is an attribute which give the remaining time of the countdown for example if timer  is set for 2 minutes then after 40 second the remaining time is 1 minute 20 seconds
+                   getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // this line keeps the screen on until the timer is finished because if the screen off at during the countdown it will give a bad user experience
                    long hours=(millisUntilFinished/3600000); // divided the millisUntilFinished  by 3600000 to get total hours since 1 hour = 3600000 milliseconds
                    long minutes=(millisUntilFinished/60000) %60;// divided the millisUntilFinished by  60000, then % 60 to get remaining minutes after full hours. since 1 minute= 60000 millisecond
                    long seconds=(millisUntilFinished/1000) %60;// divided the millisUntilFinished by  1000, then % 60 to get remaining seconds after full minutes. since 1 second= 1000 millisecond
@@ -136,7 +135,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                    secondpicker.setEnabled(true);// similarly setEnabled is set to true  for second this will help the user to agian set the timer
                    isTimerRunning=false;// the flag is set to false again so that in the if statement checking before setting timer again then it is false so that the user start the timer again
                    isPaused=false;
-                   sendNotification();
+                   sendNotification();// calling this method to play an audio after finishing the timer
                }
            }.start(); //at last this start method is called to start this whole starttimer method
 
@@ -146,6 +145,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
 
     private void pauseTimer()// this is the pauseTimer method for acting the starbutton as pause button when started the timer
     {
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         if (countDownTimer!=null) {//checking if there is any countdown is running or not if it is null the no countdown is running if its not null then the countdown is running
             countDownTimer.cancel(); // this line basically pause the timer by using built in method cancel()
             countDownTimer=null;// setting the countdown to null as timer is paused so setting the coundowntimer object null will help us to understand countdown is running now or not
@@ -159,7 +159,6 @@ public class Exercise_sectionActivity extends AppCompatActivity {
 
     private void resumeTimer()
     {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         countDownTimer =new CountDownTimer(remainingTimeMillis,1000) { //again created an object of counttimer to start counting timer again after being resumed
             @Override
@@ -192,34 +191,36 @@ public class Exercise_sectionActivity extends AppCompatActivity {
         isPaused=false;
     }
 
-    private void sendNotification()
+    private void sendNotification() // created this method to create sound once the timer is finished
     {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         startbutton.setText("Done");
-        if (mediaPlayer!=null)
+        if (mediaPlayer!=null) // checking if mediaplayer object already  have any audio or the previous audio which was sounded first time so that we can destroy that object
         {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer=null;
+            mediaPlayer.stop();// first we are stopping the audio of the mediaplayer object
+            mediaPlayer.release();// this method will destroy the object's underlying resources just like we destroy our garbage
+            mediaPlayer=null;// assigning mediaplayer to null so that when again it wil execute here it will automatically go to the else block
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         else
         {
-            mediaPlayer = MediaPlayer.create(Exercise_sectionActivity.this, R.raw.notify_timer_finish);
-            mediaPlayer.setLooping(true);
-            mediaPlayer.start();
+            mediaPlayer = MediaPlayer.create(Exercise_sectionActivity.this, R.raw.notify_timer_finish); // creating a new object of mediaplayerit takes 2 argument first is context which is  Exercise_sectionActivity.this and another is the path of the audio.....>notify_timer_finish audio is inside the raw folder
+            mediaPlayer.setLooping(true);//this method will play the audio in  a loop
+            mediaPlayer.start();// starting to play audio of mediaplayer
         }
         startbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (mediaPlayer != null && mediaPlayer.isPlaying())
+                if (mediaPlayer != null && mediaPlayer.isPlaying())// checking if mediaplayer is not null and mediaplayer isplaying so that only then we can stop that...for example  if an audio is playing only then we can stop it
                 {
-                   mediaPlayer.stop();
-                    //mediaPlayer.reset();
-                    mediaPlayer.release();
-                    mediaPlayer=null;
+                   mediaPlayer.stop();// stop the audio
+                    mediaPlayer.release();// destroy the object frees all system resources
+                    mediaPlayer=null; // assigning it to null
                     startbutton.setText("Start");
-                    startbutton.setOnClickListener(null);
-                    ReInitializeStartButton();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    startbutton.setOnClickListener(null);// remove listener to prevent multiple clicks
+                    ReInitializeStartButton();//calling ReInitializeStartButton method to reinitialize the button's behaviour its a method which we have created below
 
                 }
             }
@@ -246,5 +247,39 @@ public class Exercise_sectionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void StopMediaPlayer() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying())// checking if mediaplayer is not null and mediaplayer isplaying so that only then we can stop that...for example  if an audio is playing only then we can stop it
+        {
+            mediaPlayer.stop();// stop the audio
+            mediaPlayer.release();// destroy the object frees all system resources
+            mediaPlayer = null; // assigning it to null
+        }
+    }
+
+    private void StopTimer()
+    {
+        if (countDownTimer!=null) {//checking if there is any countdown is running or not if it is null the no countdown is running if its not null then the countdown is running
+            countDownTimer.cancel(); // this line basically pause the timer by using built in method cancel()
+            countDownTimer=null;// setting the countdown to null as timer is paused so setting the coundowntimer object null will help us to understand countdown is running now or not
+            isTimerRunning=false;
+        }
+    }
+
+    @Override
+    protected void onPause()//this method is automatically called  When the user leaves the activity (e.g., opens another screen, presses the home button, or locks the screen). its a built in method
+    {
+        super.onPause();// This calls the original onPause() function from the parent class (Activity). It ensures that Android handles things like saving UI states properly.
+        StopMediaPlayer();// Stops the media player if it is still playing. its a method we have created above
+        StopTimer();// Stops the countdown timer if it is still running.   its a method we have created above
+    }
+
+    @Override
+    protected void onDestroy() //this method is automatically called when the activity is completely destroyed (e.g., when the user closes the app or the system kills the activity to free memory).
+    {
+        super.onDestroy();// Calls the original onDestroy() from the Activity class to clean up system resources.
+        StopMediaPlayer();// Stops the media player if it is still playing. its a method we have created above
+        StopTimer();// Stops the countdown timer if it is still running.   its a method we have created above
     }
 }

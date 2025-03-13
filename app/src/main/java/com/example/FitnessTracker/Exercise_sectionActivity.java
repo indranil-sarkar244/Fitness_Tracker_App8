@@ -26,13 +26,13 @@ import com.airbnb.lottie.LottieAnimationView;
 import java.lang.reflect.Field;
 
 public class Exercise_sectionActivity extends AppCompatActivity {
-    private LottieAnimationView lottieview;// created a varriable of LottieAnimationView
-    private NumberPicker hourpicker; // created a varriable of NumberPicker
-    private NumberPicker minutepicker;// created a varriable of NumberPicker
-    private NumberPicker secondpicker;// created a varriable of NumberPicker
-    private Button startbutton;// created a varriable of Button
-    private CountDownTimer countDownTimer;//created a varriable of CountDownTimer
-    private MediaPlayer  mediaPlayer, mediaPlayer1;
+    private LottieAnimationView lottieview;// created a object of LottieAnimationView
+    private NumberPicker hourpicker; // created a object of NumberPicker
+    private NumberPicker minutepicker;// created a object of NumberPicker
+    private NumberPicker secondpicker;// created a object of NumberPicker
+    private Button startbutton;// created a object of Button
+    private CountDownTimer countDownTimer;//created a object of CountDownTimer
+    private MediaPlayer  mediaPlayer, mediaPlayer1;// created  2 object of mediaplayer
     private long timeinMillis , remainingTimeMillis=0;// created 2 long varriable firstone will store the whole time set for timer in millisecond and the second one wil be used while pause and resuming to count how much we have to count for the remaining time
     private boolean isTimerRunning=false, isPaused=false;//created 2  boolean flag one is for detecting is the countdown is continuing or not and the second one is for detecting if the timer is paused or not
    private  boolean NotClicked=true;
@@ -68,13 +68,13 @@ public class Exercise_sectionActivity extends AppCompatActivity {
         }
 
         startbutton.setOnClickListener(v ->{ // when the button for timer is clicked
-            if (isTimerRunning) // checking if a timer is already running using the boolean varriable isTimerRunning which is already set to false
+            if (isTimerRunning ) // checking if a timer is already running using the boolean varriable isTimerRunning which is already set to false
                 // if the condition is false means already a timer is running if true means no timer is running we checked using if statement because if
                 // a timer is already running and then the user click the start button to start a timer in the middle of a timer the app may be  crashed
             {
                 pauseTimer(); // if the if statement is not  satisfied then it will call pausetimer because if a time or countdown is already running then the user will obviously may want to pause the timer
                 //pausetimer is a method which we have created below
-            } else if (isPaused)// checking if the time is paused using boolean varriable or flag isPaused
+            } else if (isPaused )// checking if the time is paused using boolean varriable or flag isPaused
             {
                 resumeTimer(); // if the else if statement is satisfied here it will call resumetimer method because if the else if statement is satisfied then it means that the user has paused the timer
                 // and obviousely if the timer is paused for some reason the user will may want to resume it again to start it from where he stopped it.......> resumetimer is a method we have created below
@@ -112,6 +112,12 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                @Override
                public void onTick(long millisUntilFinished) {// millisUntilFinished is an attribute which give the remaining time of the countdown for example if timer  is set for 2 minutes then after 40 second the remaining time is 1 minute 20 seconds
                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // this line keeps the screen on until the timer is finished because if the screen off at during the countdown it will give a bad user experience
+                   if (mediaPlayer1==null)
+                   {
+                       mediaPlayer1=MediaPlayer.create(Exercise_sectionActivity.this, R.raw.clock_tick);
+                       mediaPlayer1.setLooping(true);
+                       mediaPlayer1.start();
+                   }
                    long hours=(millisUntilFinished/3600000); // divided the millisUntilFinished  by 3600000 to get total hours since 1 hour = 3600000 milliseconds
                    long minutes=(millisUntilFinished/60000) %60;// divided the millisUntilFinished by  60000, then % 60 to get remaining minutes after full hours. since 1 minute= 60000 millisecond
                    long seconds=(millisUntilFinished/1000) %60;// divided the millisUntilFinished by  1000, then % 60 to get remaining seconds after full minutes. since 1 second= 1000 millisecond
@@ -126,6 +132,12 @@ public class Exercise_sectionActivity extends AppCompatActivity {
 
                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//this line clears the flag so that the screen can naturally off after the timer is finished
 
+                   if (mediaPlayer1!=null)
+                   {
+                       mediaPlayer1.stop();
+                       mediaPlayer1.release();
+                       mediaPlayer1=null;
+                   }
                    hourpicker.setValue(0);// again set the value of hourpicker to 0 so that the user can again set thr timer according to their wish
                    minutepicker.setValue(0);// similarly again set the value of minutepicker to 0 so that the user can again set thr timer according to their wish
                    secondpicker.setValue(0);// again set the value of secondpicker to 0 so that the user can again set thr timer according to their wish
@@ -135,6 +147,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                    secondpicker.setEnabled(true);// similarly setEnabled is set to true  for second this will help the user to agian set the timer
                    isTimerRunning=false;// the flag is set to false again so that in the if statement checking before setting timer again then it is false so that the user start the timer again
                    isPaused=false;
+                   UpdateButton();
                    sendNotification();// calling this method to play an audio after finishing the timer
                }
            }.start(); //at last this start method is called to start this whole starttimer method
@@ -145,10 +158,17 @@ public class Exercise_sectionActivity extends AppCompatActivity {
 
     private void pauseTimer()// this is the pauseTimer method for acting the starbutton as pause button when started the timer
     {
+        if (hourpicker.getValue()==0 && minutepicker.getValue()==0 && secondpicker.getValue()==0)
+        {
+            return;
+        }
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        if (countDownTimer!=null) {//checking if there is any countdown is running or not if it is null the no countdown is running if its not null then the countdown is running
+        if ((countDownTimer!=null)&& (mediaPlayer1!=null)) {//checking if there is any countdown is running or not if it is null the no countdown is running if its not null then the countdown is running
             countDownTimer.cancel(); // this line basically pause the timer by using built in method cancel()
             countDownTimer=null;// setting the countdown to null as timer is paused so setting the coundowntimer object null will help us to understand countdown is running now or not
+                mediaPlayer1.stop();
+                mediaPlayer1.release();
+                mediaPlayer1=null;
         }
         remainingTimeMillis=(hourpicker.getValue()*3600+minutepicker.getValue()*60+secondpicker.getValue())*1000;//its a mathematical calculation we have done to store the remaining time to count after pausing the timer so that when resumed it can start counting from where it was stopped....> we have done similar mathematical calculation above at line 92 where it was fully explained
         startbutton.setText("Resume");// set the text of button as resume for better user experience as when timer is paused by the user he may want to resume the timer again
@@ -163,6 +183,12 @@ public class Exercise_sectionActivity extends AppCompatActivity {
         countDownTimer =new CountDownTimer(remainingTimeMillis,1000) { //again created an object of counttimer to start counting timer again after being resumed
             @Override
             public void onTick(long millisUntilFinished) {
+                if (mediaPlayer1==null)
+                {
+                    mediaPlayer1=MediaPlayer.create(Exercise_sectionActivity.this, R.raw.clock_tick);
+                    mediaPlayer1.setLooping(true);
+                    mediaPlayer1.start();
+                }
                 remainingTimeMillis=millisUntilFinished;
                 long hours=(millisUntilFinished/3600000); // divided the millisUntilFinished  by 3600000 to get total hours since 1 hour = 3600000 milliseconds
                 long minutes=(millisUntilFinished/60000) %60;// divided the millisUntilFinished by  60000, then % 60 to get remaining minutes after full hours. since 1 minute= 60000 millisecond
@@ -178,6 +204,13 @@ public class Exercise_sectionActivity extends AppCompatActivity {
                 startTimer();
                 isTimerRunning=false;
                 isPaused=false;
+                UpdateButton();
+                if (mediaPlayer1!=null)
+                {
+                    mediaPlayer1.stop();
+                    mediaPlayer1.release();
+                    mediaPlayer1=null;
+                }
                 startbutton.setText("Start");
                 hourpicker.setEnabled(true);//enabled each numberpickers true so that it can again take input after finishing one time
                 minutepicker.setEnabled(true);
@@ -250,11 +283,17 @@ public class Exercise_sectionActivity extends AppCompatActivity {
     }
 
     private void StopMediaPlayer() {
-        if (mediaPlayer != null && mediaPlayer.isPlaying())// checking if mediaplayer is not null and mediaplayer isplaying so that only then we can stop that...for example  if an audio is playing only then we can stop it
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) // checking if mediaplayer is not null and mediaplayer isplaying so that only then we can stop that...for example  if an audio is playing only then we can stop it
         {
             mediaPlayer.stop();// stop the audio
             mediaPlayer.release();// destroy the object frees all system resources
-            mediaPlayer = null; // assigning it to null
+            mediaPlayer = null;
+        }
+        if (mediaPlayer1!=null && mediaPlayer1.isPlaying())
+            {
+            mediaPlayer1.stop();
+            mediaPlayer1.release();
+            mediaPlayer1=null;// assigning it to null
         }
     }
 
@@ -264,6 +303,25 @@ public class Exercise_sectionActivity extends AppCompatActivity {
             countDownTimer.cancel(); // this line basically pause the timer by using built in method cancel()
             countDownTimer=null;// setting the countdown to null as timer is paused so setting the coundowntimer object null will help us to understand countdown is running now or not
             isTimerRunning=false;
+            mediaPlayer1=null;
+            mediaPlayer=null;
+        }
+    }
+
+    private  void UpdateButton()
+    {
+        int hour=hourpicker.getValue();// getting the value of hourspicker set by the user
+        int minute=minutepicker.getValue();// similarly getting the value of minutepicker set by the user
+        int second=secondpicker.getValue();// similarly getting the value of secondpicker set by the user
+
+        timeinMillis=((hour*3600) + (minute*60) +second)*1000;
+        if (timeinMillis==0 && isTimerRunning)
+        {
+            startbutton.setEnabled(false);
+        }
+        else
+        {
+            startbutton.setEnabled(true);
         }
     }
 

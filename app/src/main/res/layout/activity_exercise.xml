@@ -570,7 +570,7 @@
                         app:layout_constraintTop_toBottomOf="@id/imageView"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/dont_know_exercise_name"
+                        app:lottie_rawRes="@raw/bench_dips"
                         app:lottie_speed="1.8"
                         tools:ignore="ImageContrastCheck" />
 

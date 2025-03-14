@@ -11,14 +11,12 @@
     <!--inside the cardview there is a LottieAnimationView for displaying the animation which the java file will get through the intent -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_for_exercise"
-        android:layout_width="match_parent"
-        android:layout_height="438dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="406dp"
+        android:layout_height="386dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieview"
@@ -35,7 +33,7 @@
         android:id="@+id/button"
         android:layout_width="149dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="36dp"
         android:backgroundTint="#880E4F"
         android:text="@string/start_the_exercise_user_want"
         android:textColor="@color/white"
@@ -43,26 +41,28 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="327dp"
         android:layout_height="79dp"
-        android:layout_marginTop="24dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_for_exercise">
+        app:layout_constraintTop_toBottomOf="@+id/textView_for_exercise_description">
+
+        <!-- this applies the custom theme to the NumberPicker View-->
+
 
         <NumberPicker
             android:id="@+id/numhour"
             android:layout_width="84dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            android:theme="@style/AppTheme.Picker" /> <!-- this applies the custom theme to the NumberPicker View-->
-
+            android:theme="@style/AppTheme.Picker" />
 
         <NumberPicker
             android:id="@+id/numminute"
@@ -81,6 +81,19 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_for_exercise_description"
+        android:layout_width="404dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_for_exercise" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

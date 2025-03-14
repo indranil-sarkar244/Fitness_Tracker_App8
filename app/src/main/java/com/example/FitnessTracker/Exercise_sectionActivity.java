@@ -2,6 +2,7 @@ package com.example.FitnessTracker;
 
 import static com.example.FitnessTracker.ExerciseActivity.animationResId;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -33,11 +34,14 @@ public class Exercise_sectionActivity extends AppCompatActivity {
     private Button startbutton;// created a object of Button
     private CountDownTimer countDownTimer;//created a object of CountDownTimer
     private MediaPlayer  mediaPlayer, mediaPlayer1;// created  2 object of mediaplayer
+    private TextView textview;
     private long timeinMillis , remainingTimeMillis=0;// created 2 long varriable firstone will store the whole time set for timer in millisecond and the second one wil be used while pause and resuming to count how much we have to count for the remaining time
     private boolean isTimerRunning=false, isPaused=false;//created 2  boolean flag one is for detecting is the countdown is continuing or not and the second one is for detecting if the timer is paused or not
    private  boolean NotClicked=true;
+   String Exercise_description;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,7 @@ public class Exercise_sectionActivity extends AppCompatActivity {
         minutepicker=findViewById(R.id.numminute);
         secondpicker=findViewById(R.id.numsecond);
         startbutton=findViewById(R.id.button);
+        textview=findViewById(R.id.textView_for_exercise_description);
 
         hourpicker.setMinValue(0);// the hourspicker's minimum value is set to 0
         hourpicker.setMaxValue(23);// the hourspicker's maximum value is set to 23 as there is is 24 hours in a day
@@ -66,6 +71,49 @@ public class Exercise_sectionActivity extends AppCompatActivity {
            lottieview.setAnimation(animationId);//set the animation in the lottieAnimationView
            lottieview.playAnimation();//plays the animation
         }
+
+        if (animationId==R.raw.jumping_jack)
+        {
+            Exercise_description=" A full-body cardio exercise that boosts heart health, burns calories, and improves coordination. Do it for 30–60 seconds per set.";
+        }
+        if (animationId==R.raw.squats)
+        {
+            Exercise_description="Strengthens legs, glutes, and core, improving lower body endurance and mobility. Aim for 12–15 reps per set.";
+        }
+        if (animationId==R.raw.lunges)
+        {
+            Exercise_description="Targets quads, hamstrings, and glutes while improving balance and flexibility. Perform 10–12 reps per leg.";
+        }
+        if (animationId==R.raw.push_ups)
+        {
+            Exercise_description="Builds upper body strength, focusing on the chest, shoulders, and triceps. Do 10–20 reps per set.";
+        }
+        if (animationId==R.raw.sit_ups)
+        {
+            Exercise_description="Strengthens the core and improves abdominal endurance. Perform 15–20 reps per set.";
+        }
+        if (animationId==R.raw.t_planks)
+        {
+            Exercise_description=" Engages the core, shoulders, and obliques while improving stability. Hold for 30–45 seconds per side.";
+        }
+        if (animationId==R.raw.crunches)
+        {
+            Exercise_description=" Isolates abdominal muscles, enhancing core strength. Aim for 15–20 reps per set.";
+        }
+        if (animationId==R.raw.burpees)
+        {
+            Exercise_description="A full-body workout that improves strength, endurance, and fat loss. Do 8–12 reps per set.";
+        }
+        if (animationId==R.raw.high_knees)
+        {
+            Exercise_description="A cardio-intensive exercise that strengthens legs and burns calories. Perform for 30–60 seconds.";
+        }
+        if (animationId==R.raw.bench_dips)
+        {
+            Exercise_description="Strengthens triceps, shoulders, and chest. Do 10–15 reps per set.";
+        }
+
+        textview.setText(Exercise_description);
 
         startbutton.setOnClickListener(v ->{ // when the button for timer is clicked
             if (isTimerRunning ) // checking if a timer is already running using the boolean varriable isTimerRunning which is already set to false

@@ -71,7 +71,7 @@
                     <Button
                         android:id="@+id/start_jumping"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -130,7 +130,7 @@
                     <Button
                         android:id="@+id/start_squat"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="52dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -185,7 +185,7 @@
                     <Button
                         android:id="@+id/start_lunges"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -245,7 +245,7 @@
                     <Button
                         android:id="@+id/start_pushups"
                         android:layout_width="match_parent"
-                        android:layout_height="49dp"
+                        android:layout_height="58dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -303,7 +303,7 @@
                     <Button
                         android:id="@+id/start_situps"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -361,7 +361,7 @@
                     <Button
                         android:id="@+id/start_Tplank"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -419,7 +419,7 @@
                     <Button
                         android:id="@+id/start_crunches"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -477,7 +477,7 @@
                     <Button
                         android:id="@+id/start_burpees"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -536,7 +536,7 @@
                     <Button
                         android:id="@+id/start_highknees"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"
@@ -595,7 +595,7 @@
                     <Button
                         android:id="@+id/start_Bench_Dips"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:backgroundTint="#028A91"
                         android:text="@string/start"
                         android:textColor="@color/white"

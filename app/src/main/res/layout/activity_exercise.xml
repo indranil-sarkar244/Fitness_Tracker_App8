@@ -54,7 +54,7 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        tools:ignore="RtlSymmetry,VisualLintOverlap" />
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/jumping_jack"
@@ -72,7 +72,9 @@
                         android:id="@+id/start_jumping"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
@@ -129,7 +131,9 @@
                         android:id="@+id/start_squat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -182,7 +186,9 @@
                         android:id="@+id/start_lunges"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="DuplicateSpeakableTextCheck" />
@@ -239,8 +245,10 @@
                     <Button
                         android:id="@+id/start_pushups"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="49dp"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="DuplicateSpeakableTextCheck" />
@@ -296,7 +304,9 @@
                         android:id="@+id/start_situps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -352,7 +362,9 @@
                         android:id="@+id/start_Tplank"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -408,7 +420,9 @@
                         android:id="@+id/start_crunches"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
@@ -464,7 +478,9 @@
                         android:id="@+id/start_burpees"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -521,7 +537,9 @@
                         android:id="@+id/start_highknees"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -578,7 +596,9 @@
                         android:id="@+id/start_Bench_Dips"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#028A91"
                         android:text="@string/start"
+                        android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />

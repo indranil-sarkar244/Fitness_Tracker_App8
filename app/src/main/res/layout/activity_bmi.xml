@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="425dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
@@ -20,14 +20,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Body Mass Index"
-        app:titleTextColor="#D7E352"
+        app:titleTextColor="#FF7F00"
         tools:ignore="VisualLintBounds" />
 
     <EditText
         android:id="@+id/weight"
-        android:layout_width="408dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="28dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_weight_in_kg"
@@ -35,16 +36,16 @@
         android:textColor="#A8E6E9"
         android:textColorHint="#90A4AE"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="DuplicateClickableBoundsCheck" />
 
     <EditText
         android:id="@+id/height"
-        android:layout_width="408dp"
-        android:layout_height="69dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
         android:autofillHints=""
         android:ems="10"
@@ -53,16 +54,15 @@
         android:textColor="#A8E6E9"
         android:textColorHint="#90A4AE"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weight" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="208dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="250dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp"
         android:text="@string/compute_bmi"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,16 +72,15 @@
 
     <TextView
         android:id="@+id/BMI_answer"
-        android:layout_width="405dp"
-        android:layout_height="175dp"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
         android:textColor="#A8E6E9"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.13" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

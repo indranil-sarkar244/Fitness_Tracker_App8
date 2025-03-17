@@ -77,21 +77,21 @@ public class BmiActivity extends AppCompatActivity {
                     double ans = weight / (height * height);
                     String message = " ";
                     if (ans < 16) {
-                        message = "According to your BMI, you fit in the Severe Thinness class. It's not healthy. You should improve your diet and lifestyle for a healthy BMI.";
+                        message = "According to your BMI, you fit in the Severe Thinness class.\nIt's not healthy. You should improve your diet and lifestyle for a healthy BMI.";
                     } else if (ans >= 16 && ans < 17) {
-                        message = "According to your BMI, you fit in the Moderate Thinness class. It's time to focus on improving your diet and nutrition.";
+                        message = "According to your BMI, you fit in the Moderate Thinness class.\n It's time to focus on improving your diet and nutrition.";
                     } else if (ans >= 17 && ans < 18.5) {
-                        message = "According to your BMI, you fit in the Mild Thinness class. You may need to gain some weight for better health.";
+                        message = "According to your BMI, you fit in the Mild Thinness class.\n You may need to gain some weight for better health.";
                     } else if (ans >= 18.5 && ans < 25) {
-                        message = "According to your BMI, you fit in the Normal class. Great job! You're maintaining a healthy BMI.";
+                        message = "According to your BMI, you fit in the Normal class. \nGreat job! You're maintaining a healthy BMI.";
                     } else if (ans >= 25 && ans < 30) {
-                        message = "According to your BMI, you fit in the Overweight class. Consider focusing on a balanced diet and regular exercise.";
+                        message = "According to your BMI, you fit in the Overweight class.\n Consider focusing on a balanced diet and regular exercise.";
                     } else if (ans >= 30 && ans < 35) {
-                        message = "According to your BMI, you fit in Obese Class I. It's important to focus on weight loss for better health.";
+                        message = "According to your BMI, you fit in Obese Class I.\n It's important to focus on weight loss for better health.";
                     } else if (ans >= 35 && ans < 40) {
-                        message = "According to your BMI, you fit in Obese Class II. You should consult with a healthcare provider for a weight loss plan.";
+                        message = "According to your BMI, you fit in Obese Class II.\n You should consult with a healthcare provider for a weight loss plan.";
                     } else if (ans >= 40) {
-                        message = "According to your BMI, you fit in Obese Class III. This is a serious health condition. Consult a healthcare professional immediately.";
+                        message = "According to your BMI, you fit in Obese Class III.\n This is a serious health condition. \nConsult a healthcare professional immediately.";
                     }
 //                    Toast.makeText(BmiActivity.this, message, Toast.LENGTH_LONG).show();
 

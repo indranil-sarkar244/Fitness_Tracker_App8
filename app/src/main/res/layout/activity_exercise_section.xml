@@ -84,15 +84,14 @@
 
     <TextView
         android:id="@+id/textView_for_exercise_description"
-        android:layout_width="404dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_for_exercise" />
 

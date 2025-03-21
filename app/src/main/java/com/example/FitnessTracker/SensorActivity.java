@@ -88,6 +88,25 @@ public class SensorActivity extends AppCompatActivity {
 
         Fitness.getHistoryClient(this, account)
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
+                .addOnSuccessListener(new OnSuccessListener<DataSet>() {
+                    @Override
+                    public void onSuccess(DataSet dataSet) {
+                        long total = dataSet.isEmpty()
+                                ? 0
+                                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
+                        stepstaken.setText(String.valueOf(total) + " steps");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(TAG, "There was a problem getting the step count.", e);
+                    }
+                });
+    }
+
+        Fitness.getHistoryClient(this, account)
+                .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(new OnSuccessListener() {
                     @Override
                     public void onSuccess(Object dataSet) {

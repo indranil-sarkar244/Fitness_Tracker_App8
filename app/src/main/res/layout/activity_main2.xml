@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF9C4"
+    android:background="#59656D"
     tools:context=".MainActivity2">
 
     <!-- BMI Card -->
@@ -35,19 +34,24 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#A078E2"
                 android:gravity="center"
                 android:text="@string/bmi"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/bmi"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/jumping_jack"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent"
-                app:srcCompat="@drawable/bmi" />
+                android:layout_height="212dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/bmi"
+                app:lottie_speed="1.5" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -76,19 +80,25 @@
                 android:id="@+id/textView4"
                 android:layout_width="183dp"
                 android:layout_height="wrap_content"
+                android:background="#A078E2"
                 android:gravity="center"
                 android:text="@string/steps"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/steps"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/step"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent"
-                app:srcCompat="@drawable/steps" />
+                android:layout_height="210dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/steps"
+                app:lottie_speed="1.5" />
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -98,7 +108,7 @@
         android:layout_width="221dp"
         android:layout_height="260dp"
         android:layout_marginTop="120dp"
-        app:cardBackgroundColor="#D8B79A"
+        app:cardBackgroundColor="#CCFF90"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:cardMaxElevation="12dp"
@@ -107,21 +117,30 @@
         app:layout_constraintTop_toBottomOf="@id/cardView">
 
 
-        <ImageView
-            android:id="@+id/tips"
-            android:layout_width="216dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/tips" />
-
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#A078E2"
             android:gravity="center"
             android:text="@string/health_tips"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/Exercise"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/exerciselogo"
+            app:lottie_speed="1.5" />
+
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#494747"
+    tools:context=".ExerciseActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--here created a cardview inside of the cardview there is a textview which will display the name of the exercise  under the textview there
+             is a LottieAnimationView which will display the animation under the LottieAnimationView there is a start button by clicking it  the user can
+             start the exercise with setting a timer whose code is written in the Exercise_sectionActivity.java and activity_exercise_section.xml -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview1"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/Jumping_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/jumping_jack"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/jumping_jack"
+                        android:layout_width="match_parent"
+                        android:layout_height="198dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/jumping_jack"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_jumping"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+                <!--same thing has done with each cardview as written in  the above comment-->
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview2"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/squats_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/squats"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/squats"
+                        android:layout_width="match_parent"
+                        android:layout_height="204dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/squats"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_squat"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview3"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/lunges_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/Lunges"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lunges"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lunges"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_lunges"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview4"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/pushups_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/push_ups"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/pushups"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/push_ups"
+                        app:lottie_speed="1.5"
+                        tools:ignore="ImageContrastCheck" />
+
+                    <Button
+                        android:id="@+id/start_pushups"
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview5"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/situps_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/sit_ups"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/situps"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/sit_ups"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_situps"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview6"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/Tplank_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/t_plank"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/Tplank"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/t_planks"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_Tplank"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview7"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/crunches_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/crunches"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/crunches"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/crunches"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_crunches"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview8"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/burpees_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/burpees"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/burpees"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/burpees"
+                        app:lottie_speed="1.5" />
+
+                    <Button
+                        android:id="@+id/start_burpees"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview9"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/highknees_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/high_knees"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/highknees"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/high_knees"
+                        app:lottie_speed="1.8"
+                        tools:ignore="ImageContrastCheck" />
+
+                    <Button
+                        android:id="@+id/start_highknees"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview10"
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardMaxElevation="12dp"
+                tools:ignore="TextSizeCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/Bench_Dips_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="#E0E0E0"
+                        android:gravity="center"
+                        android:text="@string/bench_dips"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry,VisualLintOverlap,TextSizeCheck" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/Bench_Dips"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/bench_dips"
+                        app:lottie_speed="1.8"
+                        tools:ignore="ImageContrastCheck" />
+
+                    <Button
+                        android:id="@+id/start_Bench_Dips"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#028A91"
+                        android:text="@string/start"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         new  Handler(Looper.getMainLooper()).postDelayed(new Runnable() { //Handler as a tool that helps run some code after a delay.  Handler is used to schedule tasks to be executed on a specific thread.
             // Looper.getMainLooper() makes sure this happens on the main UI thread (so the app doesn’t freeze).
-           // postDelayed : This tells the app: "Wait for 3 seconds, then do something."
+            // postDelayed : This tells the app: "Wait for 3 seconds, then do something."
             // 10000 means 3000 milliseconds, which is 10 seconds.
             @Override
             public void run() { //The run() method runs.

@@ -1,5 +1,6 @@
 package com.example.FitnessTracker;
 
+// Import necessary Android and Google Fit libraries
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +26,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 public class SensorActivity extends AppCompatActivity {
 
+    // Constants for Google Fit permissions and logging
     private static final int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = 1;
     private static final String TAG = "SensorActivity";
 
+//    UI elements
     private TextView stepstaken;
     private Toolbar toolbar;
+
+    // Google Fit related objects
     private FitnessOptions fitnessOptions;
     private GoogleSignInClient googleSignInClient;
 
@@ -38,10 +43,12 @@ public class SensorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
 
+        // Initialize UI elements
         toolbar = findViewById(R.id.toolbar3);
         stepstaken = findViewById(R.id.steptaken);
-        stepstaken.setText("0"); // Initial display
+        stepstaken.setText("0"); // Set initial step count to 0
 
+        // Set initial step count to 0
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,14 +61,17 @@ public class SensorActivity extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        // Set up Google Fit permissions for step counting
         fitnessOptions = FitnessOptions.builder()
                 .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
                 .build();
 
+        // Check if we have necessary permissions
         checkGoogleFitPermissions();
     }
 
+    // Check if we have Google Fit permissions, if not request them
     private void checkGoogleFitPermissions() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account == null) {
@@ -77,11 +87,13 @@ public class SensorActivity extends AppCompatActivity {
         }
     }
 
+    // Start Google Sign-In process
     private void signInToGoogle() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, GOOGLE_FIT_PERMISSIONS_REQUEST_CODE);
     }
 
+    // Handle the result of Google Sign-In
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,6 +106,7 @@ public class SensorActivity extends AppCompatActivity {
         }
     }
 
+    // Access Google Fit data to get step count
     private void accessGoogleFit() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account == null) {
@@ -101,6 +114,7 @@ public class SensorActivity extends AppCompatActivity {
             return;
         }
 
+        // Read today's step count
         Fitness.getHistoryClient(this, account)
                 .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
                 .addOnSuccessListener(new OnSuccessListener<DataSet>() {
@@ -121,6 +135,7 @@ public class SensorActivity extends AppCompatActivity {
                 });
     }
 
+    // Update the UI with new step count
     private void updateStepCounter(int steps) {
         if (stepstaken != null) {
             stepstaken.setText(String.format("Steps today: %d", steps));
@@ -135,7 +150,7 @@ public class SensorActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    // Handle back button press // Refresh step count when activity resumes
     @Override
     protected void onResume() {
         super.onResume();

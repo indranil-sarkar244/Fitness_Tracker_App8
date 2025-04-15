@@ -27,8 +27,11 @@
         <activity
             android:name=".SensorActivity"
             android:exported="false" />
-        <activity
-            android:name=".BmiActivity"
+        <activity android:name=".ExerciseActivity"
+            android:exported="false" />
+        <activity android:name=".Exercise_sectionActivity"
+            android:exported="false" />
+        <activity android:name=".BmiActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
@@ -36,6 +39,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

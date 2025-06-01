@@ -38,11 +38,13 @@ public class SensorActivity extends AppCompatActivity {
     // UI Elements
     private TextView stepstaken; // Text view to show step count
     private TextView caloriesBurned; // Text view to show calories burned
+    private TextView distanceWalked;   // Text view to show the total distance walked
+
     private Toolbar toolbar;         // App toolbar
     private CircularProgressBar circularProgressBar; // Circular progress bar for animated steps
 
     // Target step goal for the progress bar (can be changed dynamically)
-    private final int maxSteps = 5000;
+    private final int maxSteps = 10000;
 
     // Google Fit API variables
     private FitnessOptions fitnessOptions;
@@ -55,14 +57,16 @@ public class SensorActivity extends AppCompatActivity {
 
         // Link UI components with layout
         toolbar = findViewById(R.id.toolbar3);
-        stepstaken = findViewById(R.id.steptaken);
+        stepstaken = findViewById(R.id.steptaken); //link steps textview from layout
         caloriesBurned = findViewById(R.id.caloriesBurned); //link calories textview from layout
+        distanceWalked = findViewById(R.id.distanceWalked); //link distance walked textview from layout
+
         circularProgressBar = findViewById(R.id.circularProgressBar);
 
         // Set initial value
         stepstaken.setText("0");
         caloriesBurned.setText("Calories: 0 kcal"); //calories intial value
-
+        distanceWalked.setText("0 km"); //distance walk intial value
         // Setup circular progress bar maximum steps
         circularProgressBar.setProgressMax(maxSteps);
         circularProgressBar.setProgress(0); // start from zero
@@ -87,6 +91,7 @@ public class SensorActivity extends AppCompatActivity {
                 .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ) //Add calories burned
                 .addDataType(DataType.AGGREGATE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
+                .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)    // ✅ Add Distance cover
                 .build();
 
         // Check permissions and proceed
@@ -184,6 +189,27 @@ public class SensorActivity extends AppCompatActivity {
                         Toast.makeText(SensorActivity.this, "Failed to read calorie data", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        // ✅ Get total distance walked today
+        Fitness.getHistoryClient(this, account)
+                .readDailyTotal(DataType.TYPE_DISTANCE_DELTA)
+                .addOnSuccessListener(new OnSuccessListener<DataSet>() {
+                    @Override
+                    public void onSuccess(DataSet dataSet) {
+                        float totalDistance = dataSet.isEmpty()
+                                ? 0
+                                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat();
+
+                        updateDistanceCounter(totalDistance);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Failed to read distance", e);
+                    }
+                });
+
     }
 
     // Update text and circular progress bar with animation
@@ -212,6 +238,12 @@ public class SensorActivity extends AppCompatActivity {
     private void updateCaloriesCounter(float calories) {
         if (caloriesBurned != null) {
             caloriesBurned.setText(String.format("Calories: %.1f kcal", calories));
+        }
+    }
+    private void updateDistanceCounter(float distanceInMeters) {
+        float distanceInKm = distanceInMeters / 1000f; // ✅ Convert meters to kilometers
+        if (distanceWalked != null) {
+            distanceWalked.setText(String.format("Distance: %.2f km", distanceInKm));
         }
     }
 

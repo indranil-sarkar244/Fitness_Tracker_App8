@@ -6,13 +6,13 @@
     <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="true"/>
 
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
-<!--Change to integrate Google fit API-->
+    <!--Change to integrate Google fit API-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
-<!-- 1st change till this-->
+    <!-- 1st change till this-->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessTracker"
         tools:targetApi="31">
-<!--        auth fit api -->
+        <!--        auth fit api -->
         <activity
             android:name=".SensorActivity"
             android:exported="false" />
@@ -46,7 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        fit api-->
+        <!--        fit api-->
         <meta-data
             android:name="com.google.android.gms.auth.api.fitness"
             android:value="true" />

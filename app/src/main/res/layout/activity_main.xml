@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal|center_vertical"
-    android:background="#FFF9C4"
+    android:background="#96D86D"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -35,7 +35,7 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading"
-        app:lottie_speed="1.5"/>
+        app:lottie_speed="1.5" />
 
 
     <ProgressBar

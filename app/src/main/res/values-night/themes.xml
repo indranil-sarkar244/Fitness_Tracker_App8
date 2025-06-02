@@ -1,7 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.FitnessTracker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Dark theme customization -->
+        <item name="colorPrimary">@color/progressBar</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">#2C3639</item> <!-- Dark surface/background -->
+        <item name="colorOnSurface">#8A784E</item> <!-- Text/icons on surface -->
     </style>
 </resources>

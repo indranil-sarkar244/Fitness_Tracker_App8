@@ -1,15 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.FitnessTracker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Light theme customization -->
+        <item name="colorPrimary">@color/progressBar</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">#E4EFE7</item>
+        <item name="colorOnSurface">#075B5E</item> <!-- Text/icons on surface -->
     </style>
 
     <style name="Theme.FitnessTracker" parent="Base.Theme.FitnessTracker" />
 
-
-    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" > <!-- Defines a custom theme "AppTheme.Picker" that inherits from a light theme without an ActionBar -->
-        <item name="android:textColorPrimary">@android:color/holo_blue_bright</item>  <!-- Sets the primary text color to bright blue -->
-        <item name="android:textSize">22sp</item> <!-- Sets the text size to 22sp for better readability -->
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@android:color/holo_blue_bright</item>
+        <item name="android:textSize">22sp</item>
     </style>
 </resources>

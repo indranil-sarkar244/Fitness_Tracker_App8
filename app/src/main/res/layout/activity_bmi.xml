@@ -1,86 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#023D42"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".BmiActivity">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Body Mass Index"
-        app:titleTextColor="#FF7F00"
-        tools:ignore="VisualLintBounds" />
+        android:elevation="4dp"
+        android:title="BMI Calculator"
+        android:titleTextColor="@android:color/white" />
 
+    <!-- Input for Weight (kg) -->
     <EditText
         android:id="@+id/weight"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="28dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/enter_weight_in_kg"
-        android:inputType="number|numberDecimal"
-        android:textColor="#A8E6E9"
-        android:textColorHint="#90A4AE"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:ignore="DuplicateClickableBoundsCheck" />
+        android:hint="Weight (kg)"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="16dp"
+        android:maxLines="1" />
 
+    <!-- Input for Height (cm) -->
     <EditText
         android:id="@+id/height"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/enter_height_in_cm"
-        android:inputType="number|numberDecimal"
-        android:textColor="#A8E6E9"
-        android:textColorHint="#90A4AE"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weight" />
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:hint="Height (cm)"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:layout_marginTop="12dp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="250dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/compute_bmi"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/height" />
+    <!-- Input for Age -->
+    <EditText
+        android:id="@+id/age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:hint="Age (years)"
+        android:inputType="number"
+        android:maxLines="1"
+        android:layout_marginTop="12dp" />
 
+    <!-- Horizontal layout for buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <!-- Calculate Button -->
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Calculate BMI" />
+
+        <!-- Spacer -->
+        <Space
+            android:layout_width="16dp"
+            android:layout_height="wrap_content" />
+
+        <!-- Reset Button -->
+        <Button
+            android:id="@+id/button_reset"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Reset" />
+    </LinearLayout>
+
+    <!-- TextView to show BMI result -->
     <TextView
         android:id="@+id/BMI_answer"
-        android:layout_width="308dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#A8E6E9"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.13" />
+        android:text="Your BMI result will appear here."
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:layout_marginTop="24dp"
+        android:background="#E0E0E0"
+        android:minHeight="120dp" />
+
+    <!-- Title for BMI History Chart -->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="BMI History"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:paddingBottom="8dp" />-->
+
+    <!-- Placeholder for BarChart (from MPAndroidChart library) -->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

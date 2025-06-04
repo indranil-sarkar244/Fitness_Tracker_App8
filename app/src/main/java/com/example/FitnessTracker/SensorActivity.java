@@ -27,6 +27,41 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+//CircularProgressBar// for 7 day history fetch
+////package com.example.FitnessTracker;
+//
+//import android.content.Intent;Intent
+//import android.graphics.Color;
+//import android.os.Bundle;
+//import android.util.Log;
+//import android.view.MenuItem;
+//import android.widget.Toast;
+//import androidx.annotation.NonNull;
+//import androidx.appcompat.app.AppCompatActivity;
+//import androidx.appcompat.widget.Toolbar;
+////mports required classes for BarChart display (MPAndroidChart)
+//import com.github.mikephil.charting.charts.BarChart;
+//import com.github.mikephil.charting.components.XAxis;
+//import com.github.mikephil.charting.components.YAxis;
+//import com.github.mikephil.charting.data.BarData;
+//import com.github.mikephil.charting.data.BarDataSet;
+//import com.github.mikephil.charting.data.BarEntry;
+//import com.github.mikephil.charting.data.BarEntry;
+//import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+//
+//import com.google.android.gms.auth.api.signin.GoogleSignIn;
+//import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+//import com.google.android.gms.fitness.Fitness;
+//import com.google.android.gms.fitness.FitnessOptions;
+//import com.google.android.gms.fitness.data.Bucket;
+//import com.google.android.gms.fitness.data.DataPoint;
+//import com.google.android.gms.fitness.data.DataSet;
+//import com.google.android.gms.fitness.data.DataType;
+//import com.google.android.gms.fitness.data.Field;
+//import com.google.android.gms.fitness.request.DataReadRequest;
+//import com.google.android.gms.fitness.result.DataReadResponse;
+
+
 public class SensorActivity extends AppCompatActivity {
 
     // Request code for Google Fit permissions
@@ -39,7 +74,7 @@ public class SensorActivity extends AppCompatActivity {
     private TextView stepstaken; // Text view to show step count
     private TextView caloriesBurned; // Text view to show calories burned
     private TextView distanceWalked;   // Text view to show the total distance walked
-
+    private TextView heartPoint; // Text view to show heart points
     private Toolbar toolbar;         // App toolbar
     private CircularProgressBar circularProgressBar; // Circular progress bar for animated steps
 
@@ -61,12 +96,17 @@ public class SensorActivity extends AppCompatActivity {
         caloriesBurned = findViewById(R.id.caloriesBurned); //link calories textview from layout
         distanceWalked = findViewById(R.id.distanceWalked); //link distance walked textview from layout
 
+        heartPoint = findViewById(R.id.heartPoint); //link heart points textview from layout
+
         circularProgressBar = findViewById(R.id.circularProgressBar);
 
         // Set initial value
         stepstaken.setText("0");
-        caloriesBurned.setText("Calories: 0 kcal"); //calories intial value
+        caloriesBurned.setText("Calories: 0 cal"); //calories intial value
         distanceWalked.setText("0 km"); //distance walk intial value
+
+        heartPoint.setText("0 points"); //heart points intial value
+
         // Setup circular progress bar maximum steps
         circularProgressBar.setProgressMax(maxSteps);
         circularProgressBar.setProgress(0); // start from zero
@@ -92,7 +132,9 @@ public class SensorActivity extends AppCompatActivity {
                 .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ) //Add calories burned
                 .addDataType(DataType.AGGREGATE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)    // ✅ Add Distance cover
+                .addDataType(DataType.TYPE_HEART_POINTS, FitnessOptions.ACCESS_READ) //Add heart points
                 .build();
+
 
         // Check permissions and proceed
         checkGoogleFitPermissions();
@@ -210,7 +252,30 @@ public class SensorActivity extends AppCompatActivity {
                     }
                 });
 
+        // ✅ Fetch today's Heart Points
+        Fitness.getHistoryClient(this, account)
+                .readDailyTotal(DataType.TYPE_HEART_POINTS)
+                .addOnSuccessListener(new OnSuccessListener<DataSet>() {
+                    @Override
+                    public void onSuccess(DataSet dataSet) {
+                        float totalHeartPoints = dataSet.isEmpty()
+                                ? 0
+                                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_INTENSITY).asFloat();
+
+                        updateHeartPoints(totalHeartPoints);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Failed to read heart points", e);
+                    }
+                });
+
+
     }
+
+
 
     // Update text and circular progress bar with animation
     private void updateStepCounter(int steps) {
@@ -237,7 +302,7 @@ public class SensorActivity extends AppCompatActivity {
     // Update calories burned
     private void updateCaloriesCounter(float calories) {
         if (caloriesBurned != null) {
-            caloriesBurned.setText(String.format("Calories: %.1f kcal", calories));
+            caloriesBurned.setText(String.format("Calories: %.1f cal", calories));
         }
     }
     private void updateDistanceCounter(float distanceInMeters) {
@@ -246,6 +311,12 @@ public class SensorActivity extends AppCompatActivity {
             distanceWalked.setText(String.format("Distance: %.2f km", distanceInKm));
         }
     }
+    private void updateHeartPoints(float heartPoints) {
+        if (heartPoint != null) {
+            heartPoint.setText(String.format("Heart Points: %.1f pts", heartPoints));
+        }
+    }
+
 
     // Handle back arrow press from toolbar
     @Override

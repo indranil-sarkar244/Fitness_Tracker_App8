@@ -2,16 +2,22 @@ package com.example.FitnessTracker;
 
 // Import necessary Android and Google Fit libraries
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,42 +31,8 @@ import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
-
-//CircularProgressBar// for 7 day history fetch
-////package com.example.FitnessTracker;
-//
-//import android.content.Intent;Intent
-//import android.graphics.Color;
-//import android.os.Bundle;
-//import android.util.Log;
-//import android.view.MenuItem;
-//import android.widget.Toast;
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.appcompat.widget.Toolbar;
-////mports required classes for BarChart display (MPAndroidChart)
-//import com.github.mikephil.charting.charts.BarChart;
-//import com.github.mikephil.charting.components.XAxis;
-//import com.github.mikephil.charting.components.YAxis;
-//import com.github.mikephil.charting.data.BarData;
-//import com.github.mikephil.charting.data.BarDataSet;
-//import com.github.mikephil.charting.data.BarEntry;
-//import com.github.mikephil.charting.data.BarEntry;
-//import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-//
-//import com.google.android.gms.auth.api.signin.GoogleSignIn;
-//import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-//import com.google.android.gms.fitness.Fitness;
-//import com.google.android.gms.fitness.FitnessOptions;
-//import com.google.android.gms.fitness.data.Bucket;
-//import com.google.android.gms.fitness.data.DataPoint;
-//import com.google.android.gms.fitness.data.DataSet;
-//import com.google.android.gms.fitness.data.DataType;
-//import com.google.android.gms.fitness.data.Field;
-//import com.google.android.gms.fitness.request.DataReadRequest;
-//import com.google.android.gms.fitness.result.DataReadResponse;
-
 
 public class SensorActivity extends AppCompatActivity {
 
@@ -74,17 +46,24 @@ public class SensorActivity extends AppCompatActivity {
     private TextView stepstaken; // Text view to show step count
     private TextView caloriesBurned; // Text view to show calories burned
     private TextView distanceWalked;   // Text view to show the total distance walked
-    private TextView heartPoint; // Text view to show heart points
+    private TextView heartPoint;// Text view to show heart points
+    private TextView desCription;
     private Toolbar toolbar;         // App toolbar
-    private CircularProgressBar circularProgressBar; // Circular progress bar for animated steps
+    private CircularProgressBar circularProgressBar;// Circular progress bar for animated steps
+    private CircularProgressBar progressBar;
+    private boolean IsstepReached=false;
+    private boolean IsHeartpointReached=false;
+    private View rootview;
 
     // Target step goal for the progress bar (can be changed dynamically)
-    private final int maxSteps = 10000;
+    private final int maxSteps = 5000;
+    private final int maxheartpoints=25;
 
     // Google Fit API variables
     private FitnessOptions fitnessOptions;
     private GoogleSignInClient googleSignInClient;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,8 +76,12 @@ public class SensorActivity extends AppCompatActivity {
         distanceWalked = findViewById(R.id.distanceWalked); //link distance walked textview from layout
 
         heartPoint = findViewById(R.id.heartPoint); //link heart points textview from layout
+        desCription=findViewById(R.id.heartpointdescrip);
 
         circularProgressBar = findViewById(R.id.circularProgressBar);
+        progressBar=findViewById(R.id.progressBar2);
+
+        rootview=findViewById(R.id.main);
 
         // Set initial value
         stepstaken.setText("0");
@@ -106,17 +89,30 @@ public class SensorActivity extends AppCompatActivity {
         distanceWalked.setText("0 km"); //distance walk intial value
 
         heartPoint.setText("0 points"); //heart points intial value
+        desCription.setText("According to WHO scoring 150 Heart Points a week can help you live longer, sleep better and boost your mood");
 
         // Setup circular progress bar maximum steps
         circularProgressBar.setProgressMax(maxSteps);
+        progressBar.setProgressMax(maxheartpoints);
         circularProgressBar.setProgress(0); // start from zero
+        progressBar.setProgress(0);
 
 
         // Setup toolbar
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);   // Back arrow
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setSupportActionBar(toolbar);//This sets the Toolbar as the app's ActionBar so you can customize it (like adding a back button, changing title, etc.).
+        if (getSupportActionBar() != null) //Checks if the ActionBar is not null (i.e., was set successfully) before customizing it.
+             {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Shows the back arrow (←) in the ActionBar, which allows users to navigate "up" (usually to the previous screen).
+            getSupportActionBar().setDisplayShowHomeEnabled(true);//When you want to show the back/up arrow, Android needs to know that it's allowed to show the home-related icon area.
+                 //So even though the back arrow is triggered by: setDisplayHomeAsUpEnabled(true); …it won’t appear visually unless:
+                 //setDisplayShowHomeEnabled(true); is also set — because it allows the system to draw that space in the ActionBar.
+
+            Drawable upArrow= AppCompatResources.getDrawable(this, androidx.appcompat.R.drawable.abc_ic_ab_back_material);//Loads the default back arrow icon (abc_ic_ab_back_material) as a Drawable from AppCompat resources.
+            if (upArrow!=null) // Makes sure the back arrow drawable was loaded successfully (not null) before using it.
+            {
+                upArrow.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);//Changes the arrow color to black using a color filter. You can change this to white or any other color if needed.
+                getSupportActionBar().setHomeAsUpIndicator(upArrow);//Sets your customized arrow (with color) as the back button icon in the ActionBar.
+            }
         }
 
         // Google Sign-In setup
@@ -258,11 +254,12 @@ public class SensorActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DataSet>() {
                     @Override
                     public void onSuccess(DataSet dataSet) {
-                        float totalHeartPoints = dataSet.isEmpty()
-                                ? 0
-                                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_INTENSITY).asFloat();
-
-                        updateHeartPoints(totalHeartPoints);
+                        float totalHeartPoints= 0f;
+                        if (!dataSet.isEmpty())
+                        {
+                           totalHeartPoints=dataSet.getDataPoints().get(0).getValue(dataSet.getDataPoints().get(0).getDataType().getFields().get(0)).asFloat();
+                        }
+                        updateHeartPoints((long)totalHeartPoints);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -279,20 +276,28 @@ public class SensorActivity extends AppCompatActivity {
 
     // Update text and circular progress bar with animation
     private void updateStepCounter(int steps) {
-        if (stepstaken != null && circularProgressBar != null) {
+//        steps=18000;
+//        final long sj=steps;
+      if (stepstaken != null && circularProgressBar != null) {
 
             // Create animation from 0 to actual step value
             ValueAnimator animator = ValueAnimator.ofInt(0, steps);
-            animator.setDuration(2500); // 2.5 second duration
+            animator.setDuration(3000); // 2.5 second duration
             animator.setInterpolator(new DecelerateInterpolator());
 
             animator.addUpdateListener(animation -> {
                 int animatedValue = (int) animation.getAnimatedValue();
 
                 // Update circular progress bar and text view during animation
-                circularProgressBar.setProgressWithAnimation((float) animatedValue, (long) 200);
+                circularProgressBar.setProgressWithAnimation((float) animatedValue, (long) 4000);
 
-                stepstaken.setText(animatedValue + "");
+                stepstaken.setText("Steps: "+animatedValue + "");
+
+                if (steps>4999 && !IsstepReached)
+                {
+                    IsstepReached=true;
+                    ShowGoalMessage();
+                }
             });
 
             // Start animation
@@ -311,19 +316,71 @@ public class SensorActivity extends AppCompatActivity {
             distanceWalked.setText(String.format("Distance: %.2f km", distanceInKm));
         }
     }
-    private void updateHeartPoints(float heartPoints) {
-        if (heartPoint != null) {
-            heartPoint.setText(String.format("Heart Points: %.1f pts", heartPoints));
+    private void updateHeartPoints(long heartPoints) {
+//   heartPoints=2;
+//   final long point =heartPoints;
+        if (stepstaken != null && progressBar != null) {
+
+            // Create animation from 0 to actual step value
+            ValueAnimator animator = ValueAnimator.ofInt(0, (int)heartPoints);
+            animator.setDuration(3000); // 2.5 second duration
+            animator.setInterpolator(new DecelerateInterpolator());
+
+            animator.addUpdateListener(animation -> {
+                int animatedValue = (int) animation.getAnimatedValue();
+
+                // Update circular progress bar and text view during animation
+                progressBar.setProgressWithAnimation((int) animatedValue, (long) 4000);
+
+                heartPoint.setText("Heart Point: "+animatedValue + "");
+
+                if (heartPoints>24 && !IsHeartpointReached)
+                {
+                    IsHeartpointReached=true;
+                    ShowGoalMessage();
+                }
+            });
+
+            // Start animation
+            animator.start();
         }
+    }
+
+
+
+    private void ShowGoalMessage()
+    {
+        if (IsstepReached && IsHeartpointReached)
+        {
+            Snackbar snackbar= Snackbar.make(rootview,"Well done you have achieved both your goals today",Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("OK", v -> snackbar.dismiss());
+            snackbar.show();
+        }
+
+        else if (IsstepReached)
+        {
+            Snackbar snackbar=Snackbar.make(rootview, "Well done you have achieved your today's step goal", Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("OK", v -> snackbar.dismiss());
+            snackbar.show();
+        }
+        else if (IsHeartpointReached)
+        {
+            Snackbar snackbar = Snackbar.make(rootview, "Well done you have achieved your today's heart point goal", Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("OK", v -> snackbar.dismiss());
+            snackbar.show();
+        }
+
     }
 
 
     // Handle back arrow press from toolbar
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            getOnBackPressedDispatcher().onBackPressed();
-            return true;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)   // This overrides the method to handle what happens when a menu item (including the back arrow) is clicked.
+    {
+        if (item.getItemId() == android.R.id.home)  //Checks if the item clicked is the back arrow (home/up button in ActionBar).
+        {
+            getOnBackPressedDispatcher().onBackPressed(); //Calls the back navigation behavior — same as pressing the physical back button.
+            return true; //Tells the system: “Yes, we handled this event ourselves.”
         }
         return super.onOptionsItemSelected(item);
     }

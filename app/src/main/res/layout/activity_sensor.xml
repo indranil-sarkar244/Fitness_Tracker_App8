@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAF1E6"
+    android:background="?attr/colorSurface"
     tools:context=".SensorActivity">
 
     <!-- Top toolbar with title -->
@@ -39,8 +39,8 @@
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circularProgressBar"
-        android:layout_width="197dp"
-        android:layout_height="197dp"
+        android:layout_width="253dp"
+        android:layout_height="268dp"
         app:cpb_background_progressbar_color="#b6bbd8"
         app:cpb_background_progressbar_width="20dp"
         app:cpb_progress_direction="to_right"
@@ -50,99 +50,119 @@
         app:cpb_start_angle="270"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.189" />
-
-    <TextView
-        android:id="@+id/steptaken"
-        android:layout_width="114dp"
-        android:layout_height="56dp"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/circularProgressBar"
-        app:layout_constraintEnd_toEndOf="@id/circularProgressBar"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@id/circularProgressBar"
-        app:layout_constraintTop_toTopOf="@id/circularProgressBar"
-        app:layout_constraintVertical_bias="0.393" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Goal: 10,000"
-        android:textSize="14sp"
-        android:textColor="#666666"
-        app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.221" />
 
 
     <!--    implement calories count -->
 
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="322dp"
+        android:layout_height="319dp"
+        app:cpb_background_progressbar_color="#b6bbd8"
+        app:cpb_background_progressbar_width="20dp"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progressbar_color="#3f51b5"
+        app:cpb_progressbar_width="15dp"
+        app:cpb_round_border="true"
+        app:cpb_start_angle="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.184" />
+
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="91dp"
-        android:layout_height="32dp"
+        android:id="@+id/steptaken"
+        android:layout_width="222dp"
+        android:layout_height="100dp"
         android:gravity="center"
-        android:text="Steps"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-        app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
-        app:layout_constraintVertical_bias="0.532" />
+        android:text="Steps: 0"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/circularProgressBar"
+        app:layout_constraintEnd_toEndOf="@id/circularProgressBar"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@id/circularProgressBar"
+        app:layout_constraintTop_toTopOf="@id/circularProgressBar"
+        app:layout_constraintVertical_bias="0.241" />
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="225dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="44dp"
+        android:text="Goal: 5000 steps"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
 
     <TextView
         android:id="@+id/caloriesBurned"
-        android:layout_width="206dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="140dp"
-        android:text="Calories: 0 cal"
+        android:layout_width="386dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="244dp"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="19sp"
+        android:text="Calories burnt: 0 cal"
+        android:textColor="#03A791"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/steptaken"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="@+id/steptaken"
         app:layout_constraintTop_toBottomOf="@+id/steptaken" />
 
-
     <TextView
         android:id="@+id/distanceWalked"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_width="244dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="132dp"
         android:text="Distance: 0.0 km"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="#FF6363"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="@+id/caloriesBurned"
+        app:layout_constraintVertical_bias="0.278" />
 
     <TextView
         android:id="@+id/heartPoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0 points"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:layout_width="195dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="76dp"
+        android:text="Heart Points: 0"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/progressBar2" />
+
+    <TextView
+        android:id="@+id/heartpointdescrip"
+        android:layout_width="388dp"
+        android:layout_height="186dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#03A791"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/distanceWalked"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.655" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

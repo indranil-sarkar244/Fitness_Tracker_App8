@@ -3,7 +3,7 @@
         <!-- Dark theme customization -->
         <item name="colorPrimary">@color/progressBar</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSurface">#2C3639</item> <!-- Dark surface/background -->
-        <item name="colorOnSurface">#8A784E</item> <!-- Text/icons on surface -->
+        <item name="colorSurface">#222831</item> <!-- Dark surface/background -->
+        <item name="colorOnSurface">#E3651D</item> <!-- Text/icons on surface -->
     </style>
 </resources>

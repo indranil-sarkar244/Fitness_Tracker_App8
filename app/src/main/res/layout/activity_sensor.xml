@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -16,51 +15,52 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#578E7E"
         android:theme="?attr/actionBarTheme"
-        app:title="Steps"
-        app:titleTextColor="#3D3D3D"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Steps"
+        app:titleTextColor="#3D3D3D" />
 
 
     <!-- Circular progress bar to show steps -->
     <!-- Make sure you've added Mikhael Lopez's CircularProgressBar dependency -->
     <!-- Starts from top -->
-<!--    app:layout_constraintTop_toBottomOf="@id/toolbar3"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintEnd_toEndOf="parent"-->
-<!--    app:layout_constraintBottom_toTopOf="@+id/textView6"-->
-<!--    app:layout_constraintVertical_bias="0.1" />-->
+    <!--    app:layout_constraintTop_toBottomOf="@id/toolbar3"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintBottom_toTopOf="@+id/textView6"-->
+    <!--    app:layout_constraintVertical_bias="0.1" />-->
 
 
     <!-- TextView for live step count -->
 
     <!-- TextView to display goal or motivational message -->
 
-    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-        android:id="@+id/circularProgressBar"
-        android:layout_width="253dp"
-        android:layout_height="268dp"
-        app:cpb_background_progressbar_color="#b6bbd8"
-        app:cpb_background_progressbar_width="20dp"
-        app:cpb_progress_direction="to_right"
-        app:cpb_progressbar_color="#3f51b5"
-        app:cpb_progressbar_width="15dp"
-        app:cpb_round_border="true"
-        app:cpb_start_angle="270"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221" />
-
 
     <!--    implement calories count -->
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/circularProgressBar"
+        android:layout_width="256dp"
+        android:layout_height="262dp"
+        app:cpb_background_progressbar_color="#b6bbd8"
+        app:cpb_background_progressbar_width="20dp"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progressbar_color="#3f51b5"
+        app:cpb_progressbar_width="15dp"
+        app:cpb_round_border="true"
+        app:cpb_start_angle="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227" />
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/progressBar2"
-        android:layout_width="322dp"
-        android:layout_height="319dp"
+        android:layout_width="321dp"
+        android:layout_height="324dp"
         app:cpb_background_progressbar_color="#b6bbd8"
         app:cpb_background_progressbar_width="20dp"
         app:cpb_progress_direction="to_right"
@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.188" />
 
     <TextView
         android:id="@+id/steptaken"
@@ -100,44 +100,48 @@
         android:textAlignment="center"
         android:textColor="?attr/colorOnSurface"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/caloriesBurned"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circularProgressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"
+        app:layout_constraintVertical_bias="0.196" />
 
     <TextView
         android:id="@+id/caloriesBurned"
         android:layout_width="386dp"
         android:layout_height="44dp"
-        android:layout_marginTop="244dp"
         android:gravity="center"
         android:text="Calories burnt: 0 cal"
         android:textColor="#03A791"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/distanceWalked"
         app:layout_constraintEnd_toEndOf="@+id/steptaken"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="@+id/steptaken"
-        app:layout_constraintTop_toBottomOf="@+id/steptaken" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/distanceWalked"
         android:layout_width="244dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="132dp"
         android:text="Distance: 0.0 km"
         android:textAlignment="center"
         android:textColor="#FF6363"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/heartpointdescrip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/caloriesBurned"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintTop_toBottomOf="@+id/caloriesBurned"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/heartPoint"
-        android:layout_width="195dp"
-        android:layout_height="65dp"
+        android:layout_width="192dp"
+        android:layout_height="64dp"
         android:layout_marginBottom="76dp"
         android:text="Heart Points: 0"
         android:textAlignment="center"
@@ -146,23 +150,24 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
         app:layout_constraintEnd_toEndOf="@+id/progressBar2"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/progressBar2" />
+        app:layout_constraintStart_toStartOf="@+id/progressBar2"
+        app:layout_constraintTop_toTopOf="@+id/steptaken"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/heartpointdescrip"
-        android:layout_width="388dp"
-        android:layout_height="186dp"
+        android:layout_width="349dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#03A791"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/distanceWalked"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintVertical_bias="0.937" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FA"
+    android:background="?attr/colorSurface"
     tools:context=".MainActivity2">
 
     <!-- BMI Card -->
@@ -17,12 +17,16 @@
         android:layout_height="240dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        app:cardBackgroundColor="#CCFF90"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:cardMaxElevation="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintBottom_toTopOf="@+id/cardView3"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,10 +48,9 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/jumping_jack"
                 android:layout_width="match_parent"
-                android:layout_height="212dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/bmi"
@@ -62,14 +65,19 @@
         android:layout_width="177dp"
         android:layout_height="240dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        app:cardBackgroundColor="#CCFF90"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:cardMaxElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent">
+        >
+        <!-- app:layout_constraintTop_toTopOf="parent">-->
+        <!-- app:layout_constraintTop_toTopOf="parent">-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,6 +99,8 @@
                 android:id="@+id/step"
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView"
@@ -108,7 +118,7 @@
         android:layout_width="221dp"
         android:layout_height="260dp"
         android:layout_marginTop="120dp"
-        app:cardBackgroundColor="#CCFF90"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:cardMaxElevation="12dp"

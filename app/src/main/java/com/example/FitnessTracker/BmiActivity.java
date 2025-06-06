@@ -23,6 +23,7 @@ public class BmiActivity extends AppCompatActivity {
     private EditText editTextWeight, editTextHeight, editTextAge;
     private Button buttonCalculate, buttonReset;
     private TextView textViewResult;
+    private TextView bmiDescrip;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,9 +39,11 @@ public class BmiActivity extends AppCompatActivity {
         buttonCalculate = findViewById(R.id.button2);
         buttonReset = findViewById(R.id.button_reset);
         textViewResult = findViewById(R.id.BMI_answer);
+        bmiDescrip=findViewById(R.id.BMItextViewDescrip);
 
         // Setup toolbar as action bar with back arrow colored black
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("BMI Calculator");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -51,6 +54,8 @@ public class BmiActivity extends AppCompatActivity {
                 getSupportActionBar().setHomeAsUpIndicator(upArrow);
             }
         }
+
+        bmiDescrip.setText("BMI (Body Mass Index) estimates body fat using height and weight.\nA healthy BMI for most adults ranges from 18.5 to 24.9.\nIt helps determine if your weight is healthy. ");
 
         // Calculate BMI on button click
         buttonCalculate.setOnClickListener(new View.OnClickListener() {

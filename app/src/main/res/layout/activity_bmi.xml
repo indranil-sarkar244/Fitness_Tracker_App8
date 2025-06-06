@@ -99,6 +99,17 @@
         android:background="#E0E0E0"
         android:minHeight="120dp" />
 
+    <TextView
+        android:id="@+id/BMItextViewDescrip"
+        android:layout_width="377dp"
+        android:layout_height="247dp"
+        android:paddingTop="25dp"
+        android:text="BMI"
+        android:textAlignment="center"
+        android:textColor="#AD49E1"
+        android:textSize="18sp"
+        android:textStyle="bold|italic" />
+
     <!-- Title for BMI History Chart -->
 <!--    <TextView-->
 <!--        android:layout_width="match_parent"-->

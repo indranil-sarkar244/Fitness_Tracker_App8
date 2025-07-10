@@ -1,9 +1,9 @@
 package com.example.FitnessTracker;
-
 // Import necessary Android and Google Fit libraries
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -110,10 +110,36 @@ public class SensorActivity extends AppCompatActivity {
             Drawable upArrow= AppCompatResources.getDrawable(this, androidx.appcompat.R.drawable.abc_ic_ab_back_material);//Loads the default back arrow icon (abc_ic_ab_back_material) as a Drawable from AppCompat resources.
             if (upArrow!=null) // Makes sure the back arrow drawable was loaded successfully (not null) before using it.
             {
-                upArrow.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);//Changes the arrow color to black using a color filter. You can change this to white or any other color if needed.
+                int nightModeFlag= getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                int arrowColor;
+                if (nightModeFlag==Configuration.UI_MODE_NIGHT_YES)
+                {
+                    arrowColor=Color.WHITE;
+                }
+                else
+                {
+                    arrowColor=Color.BLACK;
+                }
+                upArrow.setColorFilter(arrowColor, PorterDuff.Mode.SRC_ATOP);//Changes the arrow color to black using a color filter. You can change this to white or any other color if needed.
                 getSupportActionBar().setHomeAsUpIndicator(upArrow);//Sets your customized arrow (with color) as the back button icon in the ActionBar.
             }
         }
+
+
+        circularProgressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SensorActivity.this, SensorActivity_History.class);
+                startActivity(intent);
+            }
+        });
+        progressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SensorActivity.this, SensorActivity_History.class);
+                startActivity(intent);
+            }
+        });
 
         // Google Sign-In setup
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

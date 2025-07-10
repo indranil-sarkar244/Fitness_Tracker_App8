@@ -1,6 +1,7 @@
 package com.example.FitnessTracker;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -50,7 +51,18 @@ public class BmiActivity extends AppCompatActivity {
 
             Drawable upArrow = AppCompatResources.getDrawable(this, androidx.appcompat.R.drawable.abc_ic_ab_back_material);
             if (upArrow != null) {
-                upArrow.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+
+                int colorMode= getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                int arrow;
+                if (colorMode==Configuration.UI_MODE_NIGHT_YES)
+                {
+                    arrow=Color.WHITE;
+                }
+                else
+                {
+                    arrow=Color.BLACK;
+                }
+                upArrow.setColorFilter(arrow, PorterDuff.Mode.SRC_ATOP);
                 getSupportActionBar().setHomeAsUpIndicator(upArrow);
             }
         }

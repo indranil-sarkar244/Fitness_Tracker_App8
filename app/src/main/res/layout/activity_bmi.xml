@@ -18,10 +18,10 @@
         android:id="@+id/toolbar"
         android:layout_width="398dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorSurface"
         android:elevation="4dp"
         android:title="BMI Calculator"
-        android:titleTextColor="@android:color/white" />
+        android:titleTextColor="?attr/colorOnPrimary" />
 
     <EditText
         android:id="@+id/weight"

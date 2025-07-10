@@ -9,17 +9,6 @@
     tools:context=".SensorActivity">
 
     <!-- Top toolbar with title -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#578E7E"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Steps"
-        app:titleTextColor="#3D3D3D" />
 
 
     <!-- Circular progress bar to show steps -->
@@ -38,6 +27,21 @@
 
 
     <!--    implement calories count -->
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="16dp"
+        android:background="?attr/colorSurface"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitleTextColor="@color/black"
+        app:title="Steps"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circularProgressBar"

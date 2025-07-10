@@ -3,7 +3,7 @@
     <style name="Base.Theme.FitnessTracker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Light theme customization -->
         <item name="colorPrimary">@color/progressBar</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <item name="colorSurface">#FFF2EB</item>
         <item name="colorOnSurface">#075B5E</item> <!-- Text/icons on surface -->
     </style>

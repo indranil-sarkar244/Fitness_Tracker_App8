@@ -43,10 +43,10 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
     implementation("com.google.android.gms:play-services-fitness:21.2.0")
-    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
+    implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation ("com.google.android.material:material:1.11.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.google.android.material:material:1.11.0")
 
 
 

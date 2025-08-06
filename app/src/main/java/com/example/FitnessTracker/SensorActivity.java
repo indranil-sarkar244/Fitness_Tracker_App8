@@ -34,6 +34,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import FitnessTracker_database.fitnessDB;
+
 public class SensorActivity extends AppCompatActivity {
 
     // Request code for Google Fit permissions
@@ -55,9 +57,15 @@ public class SensorActivity extends AppCompatActivity {
     private boolean IsHeartpointReached=false;
     private View rootview;
 
+
     // Target step goal for the progress bar (can be changed dynamically)
     private final int maxSteps = 5000;
     private final int maxheartpoints=25;
+    int [] stepHolder ={-1};
+    int []heartHolder= {-1};
+    boolean [] isStepReady = {false};
+    boolean [] isHeartPointReady={false};
+    boolean [] inserted ={false};
 
     // Google Fit API variables
     private FitnessOptions fitnessOptions;
@@ -225,6 +233,11 @@ public class SensorActivity extends AppCompatActivity {
 
                         // Update the UI with animation
                         updateStepCounter(totalSteps);
+                        stepHolder[0] = totalSteps;
+                        isStepReady[0] = true;
+                        InsertData(stepHolder[0], heartHolder[0]);
+                       // Log.d("Warning", "Skipped DB insert: curSteps=" + totalSteps);
+//                        st=totalSteps;
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -285,7 +298,10 @@ public class SensorActivity extends AppCompatActivity {
                         {
                            totalHeartPoints=dataSet.getDataPoints().get(0).getValue(dataSet.getDataPoints().get(0).getDataType().getFields().get(0)).asFloat();
                         }
-                        updateHeartPoints((long)totalHeartPoints);
+                        updateHeartPoints((int)totalHeartPoints);
+                        heartHolder[0] = (int)totalHeartPoints;
+                        isHeartPointReady[0] = true;
+                        InsertData(stepHolder[0], heartHolder[0]);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -342,7 +358,7 @@ public class SensorActivity extends AppCompatActivity {
             distanceWalked.setText(String.format("Distance: %.2f km", distanceInKm));
         }
     }
-    private void updateHeartPoints(long heartPoints) {
+    private void updateHeartPoints(int heartPoints) {
 //   heartPoints=2;
 //   final long point =heartPoints;
         if (stepstaken != null && progressBar != null) {
@@ -396,6 +412,20 @@ public class SensorActivity extends AppCompatActivity {
             snackbar.show();
         }
 
+    }
+
+
+    private void  InsertData(int steps, int heartpoints)
+    {
+        if (isStepReady[0] && isHeartPointReady[0] && !inserted[0])
+        {
+            inserted[0] = true;
+            fitnessDB dbhelper = new fitnessDB(SensorActivity.this);
+            dbhelper.clearDataIfNewWeek(steps);
+            String today = dbhelper.getTodayName();
+            dbhelper.insertOrUpdateData(today, steps, heartpoints);
+            Log.d("DB_INSERT", "Inserted: steps=" + steps + ", hp=" + heartpoints);
+        }
     }
 
 

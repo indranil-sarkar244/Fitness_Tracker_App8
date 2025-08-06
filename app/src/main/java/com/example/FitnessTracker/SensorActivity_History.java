@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,11 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import FitnessTracker_database.fitnessDB;
+import kotlin.Pair;
 
 public class SensorActivity_History extends AppCompatActivity {
 
@@ -46,6 +52,7 @@ public class SensorActivity_History extends AppCompatActivity {
         bar=findViewById(R.id.barchart);
         steps=findViewById(R.id.chip_step);
         heart_points=findViewById(R.id.chip_point);
+        fitnessDB dbhelper =new fitnessDB(SensorActivity_History.this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar()!=null)
         {
@@ -73,23 +80,32 @@ public class SensorActivity_History extends AppCompatActivity {
             }
         }
 
-        ArrayList<BarEntry> information=new ArrayList<>(); // making an arraylist object  of type barentry just like int float etc here barentry as the data will be enetered in bar chart
-        //adding values
-        information.add(new BarEntry(0f,2000));
-        information.add(new BarEntry(1f,5000));
-        information.add(new BarEntry(2f,1000));
-        information.add(new BarEntry(3f,500));
-        information.add(new BarEntry(4f,1500));
-        information.add(new BarEntry(5f,10000));
-        information.add(new BarEntry(6f,2500));
+        Map<String, Pair<Integer, Integer>> weeklyData = dbhelper.getWeeklyStepsAndPointsAsMap();
 
         final  String[] days={"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};//  creating a string arrray which will be entered as the x label data as days like monday , tuesday etc
+        ArrayList<BarEntry> stepEntries=new ArrayList<>(); // making an arraylist object  of type barentry just like int float etc here barentry as the data will be enetered in bar chart
+
+        for (int i=0; i<days.length; i++)
+        {
+            Pair<Integer, Integer> data = weeklyData.get(days[i]);
+            Log.d("DEBUG_WEEKLY_DATA", "Day: " + days[i] + ", Data: " + (data != null ? data.getFirst() : "null"));
+            if (data!=null)
+            {
+                stepEntries.add(new BarEntry(i,data.getFirst()));
+            }
+            else
+            {
+                stepEntries.add(new BarEntry(i, 0));
+            }
+        }
+
+
         XAxis xAxis = bar.getXAxis(); // creating an object of XAxis
         xAxis.setValueFormatter(new IndexAxisValueFormatter(days)); // set label on the x axis using days array
         xAxis.setGranularity(1f);// Set the minimum interval between two labels (1f = one bar per label)
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);// position the x axis label at the bottom of the chart
 
-        BarDataSet dataset=new BarDataSet(information,"Steps"); //Create a new dataset from the list of BarEntry objects with the label "Steps"
+        BarDataSet dataset=new BarDataSet(stepEntries,"Steps"); //Create a new dataset from the list of BarEntry objects with the label "Steps"
         int getUiMode= getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK; // getting the ui mode means it detects whether the mode is dark or white
         if (getUiMode==Configuration.UI_MODE_NIGHT_YES) {
             dataset.setColor(Color.parseColor("#006A71")); // it sets the color of the bar

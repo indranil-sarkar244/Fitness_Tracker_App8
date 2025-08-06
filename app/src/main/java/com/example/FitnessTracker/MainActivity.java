@@ -29,6 +29,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();//finish(); closes MainActivity, so when the user presses the back button, they won't return to it.
             }
-        }, 3000);
+        }, 5000);
     }
 }
